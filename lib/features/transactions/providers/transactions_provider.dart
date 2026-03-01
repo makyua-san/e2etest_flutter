@@ -34,6 +34,6 @@ final transactionByIdProvider =
 final sortLabelProvider = Provider<String>((ref) {
   final faultController = ref.watch(faultControllerProvider);
   return faultController.isSortReversed
-      ? 'Sorted: Oldest first'
+      ? 'Sorted: Newest first'
       : 'Sorted: Newest first';
 });

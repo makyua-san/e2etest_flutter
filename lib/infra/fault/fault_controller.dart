@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:e2etest_flutter/infra/fault/fault_type.dart';
 
 class FaultController extends ChangeNotifier {
-  bool _sortReversed = false;
+  bool _sortReversed = true;
 
   bool get isSortReversed => _sortReversed;
 

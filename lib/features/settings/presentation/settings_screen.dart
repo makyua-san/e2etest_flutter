@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:e2etest_flutter/app/router.dart';
 import 'package:e2etest_flutter/features/auth/providers/auth_provider.dart';
 import 'package:e2etest_flutter/features/settings/providers/settings_provider.dart';
-import 'package:e2etest_flutter/features/settings/presentation/widgets/debug_panel.dart';
+// import 'package:e2etest_flutter/features/settings/presentation/widgets/debug_panel.dart';
 import 'package:e2etest_flutter/shared/semantics/semantics_labels.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -76,22 +76,22 @@ class SettingsScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Debug',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.grey,
-                    ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: DebugPanel(),
-            ),
-            const SizedBox(height: 24),
+            // const SizedBox(height: 24),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: Text(
+            //     'Debug',
+            //     style: Theme.of(context).textTheme.titleSmall?.copyWith(
+            //           color: Colors.grey,
+            //         ),
+            //   ),
+            // ),
+            // const SizedBox(height: 8),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 16),
+            //   child: DebugPanel(),
+            // ),
+            // const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Semantics(
