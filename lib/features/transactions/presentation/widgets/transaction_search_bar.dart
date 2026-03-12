@@ -27,7 +27,7 @@ class _TransactionSearchBarState extends ConsumerState<TransactionSearchBar> {
       child: TextField(
         controller: _controller,
         decoration: InputDecoration(
-          hintText: 'Search by merchant...',
+          hintText: '店舗名で検索...',
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _controller.text.isNotEmpty
               ? IconButton(

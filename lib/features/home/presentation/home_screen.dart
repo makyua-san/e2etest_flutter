@@ -16,10 +16,11 @@ class HomeScreen extends ConsumerWidget {
     final authState = ref.watch(authStateProvider);
     final monthlyTotalAsync = ref.watch(monthlyTotalProvider);
     final currencyFormat = NumberFormat.currency(locale: 'ja_JP', symbol: '¥');
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('ホーム'),
         actions: const [
           DebugInfoButton(),
         ],
@@ -30,22 +31,35 @@ class HomeScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Card(
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.tertiary,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.person_outline,
                         size: 48,
-                        color: Colors.blue,
+                        color: colorScheme.onPrimary,
                       ),
                       const SizedBox(height: 8),
                       Semantics(
                         label: SemanticsLabels.homeUsername,
                         child: Text(
-                          'Welcome, ${authState.username ?? 'User'}',
-                          style: Theme.of(context).textTheme.titleLarge,
+                          'ようこそ、${authState.username ?? 'User'}さん',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: colorScheme.onPrimary,
+                              ),
                         ),
                       ),
                     ],
@@ -58,9 +72,22 @@ class HomeScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      Text(
-                        'Monthly Total',
-                        style: Theme.of(context).textTheme.titleMedium,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.calendar_month,
+                            size: 20,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '今月の合計',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 8),
                       monthlyTotalAsync.when(
@@ -73,7 +100,7 @@ class HomeScreen extends ConsumerWidget {
                                 .headlineMedium
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: colorScheme.primary,
                                 ),
                           ),
                         ),
@@ -90,7 +117,11 @@ class HomeScreen extends ConsumerWidget {
                 child: ElevatedButton.icon(
                   onPressed: () => context.push(AppRoutes.transactions),
                   icon: const Icon(Icons.receipt_long),
-                  label: const Text('View Transactions'),
+                  label: const Text('取引一覧を見る'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -99,7 +130,7 @@ class HomeScreen extends ConsumerWidget {
                 child: OutlinedButton.icon(
                   onPressed: () => context.push(AppRoutes.settings),
                   icon: const Icon(Icons.settings),
-                  label: const Text('Settings'),
+                  label: const Text('設定'),
                 ),
               ),
             ],

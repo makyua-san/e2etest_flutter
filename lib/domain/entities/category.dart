@@ -1,8 +1,8 @@
 enum Category {
-  subscription('Subscription'),
-  groceries('Groceries'),
-  transport('Transport'),
-  shopping('Shopping');
+  subscription('サブスクリプション'),
+  groceries('食料品'),
+  transport('交通'),
+  shopping('ショッピング');
 
   const Category(this.displayName);
   final String displayName;

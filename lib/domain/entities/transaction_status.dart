@@ -1,7 +1,7 @@
 enum TransactionStatus {
-  completed('Completed'),
-  pending('Pending'),
-  failed('Failed');
+  completed('完了'),
+  pending('保留中'),
+  failed('失敗');
 
   const TransactionStatus(this.displayName);
   final String displayName;

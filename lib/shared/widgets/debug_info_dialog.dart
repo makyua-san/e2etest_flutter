@@ -11,13 +11,13 @@ class DebugInfoDialog extends ConsumerWidget {
     final faultController = ref.watch(faultControllerProvider);
 
     final debugInfo = '''
-App: E2E Test Flutter Demo
+アプリ: E2E テスト Flutter デモ
 Version: 1.0.0
 
-Fault Status:
+フォルト状態:
 - SORT_REVERSED: ${faultController.isSortReversed ? 'ACTIVE' : 'inactive'}
 
-Current State: ${faultController.statusText}
+現在の状態: ${faultController.statusText}
 ''';
 
     return AlertDialog(
@@ -25,7 +25,7 @@ Current State: ${faultController.statusText}
         children: [
           Icon(Icons.bug_report, color: Colors.amber),
           SizedBox(width: 8),
-          Text('Debug Info'),
+          Text('デバッグ情報'),
         ],
       ),
       content: Semantics(
@@ -46,7 +46,7 @@ Current State: ${faultController.statusText}
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Close'),
+          child: const Text('閉じる'),
         ),
       ],
     );

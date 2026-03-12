@@ -34,7 +34,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     // Simple validation: any non-empty username/password
     if (username.isEmpty || password.isEmpty) {
       state = state.copyWith(
-        error: 'Username and password are required',
+        error: 'ユーザー名とパスワードを入力してください',
       );
       return false;
     }

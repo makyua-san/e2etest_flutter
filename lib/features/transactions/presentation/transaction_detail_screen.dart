@@ -17,19 +17,20 @@ class TransactionDetailScreen extends ConsumerWidget {
     final transactionAsync = ref.watch(transactionByIdProvider(transactionId));
     final dateFormat = DateFormat('yyyy/MM/dd HH:mm:ss');
     final currencyFormat = NumberFormat.currency(locale: 'ja_JP', symbol: '¥');
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
           label: SemanticsLabels.txDetailTitle,
-          child: const Text('Transaction Detail'),
+          child: const Text('取引詳細'),
         ),
       ),
       body: transactionAsync.when(
         data: (transaction) {
           if (transaction == null) {
             return const Center(
-              child: Text('Transaction not found'),
+              child: Text('取引が見つかりません'),
             );
           }
 
@@ -47,15 +48,21 @@ class TransactionDetailScreen extends ConsumerWidget {
                           width: 80,
                           height: 80,
                           decoration: BoxDecoration(
-                            color: _getCategoryColor(transaction.category.name)
-                                .withOpacity(0.1),
+                            gradient: LinearGradient(
+                              colors: [
+                                _getCategoryColor(transaction.category.name),
+                                _getCategoryColor(transaction.category.name)
+                                    .withOpacity(0.6),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Icon(
                             _getCategoryIcon(transaction.category.name),
                             size: 40,
-                            color:
-                                _getCategoryColor(transaction.category.name),
+                            color: Colors.white,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -82,7 +89,7 @@ class TransactionDetailScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         _DetailRow(
-                          label: 'Amount',
+                          label: '金額',
                           semanticLabel: SemanticsLabels.txDetailAmount,
                           child: Text(
                             currencyFormat.format(transaction.amount),
@@ -91,13 +98,13 @@ class TransactionDetailScreen extends ConsumerWidget {
                                 .titleLarge
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: colorScheme.primary,
                                 ),
                           ),
                         ),
-                        const Divider(),
+                        Divider(color: colorScheme.outlineVariant),
                         _DetailRow(
-                          label: 'Date & Time',
+                          label: '日時',
                           semanticLabel: SemanticsLabels.txDetailTimestamp,
                           child: Text(
                             dateFormat
@@ -105,9 +112,9 @@ class TransactionDetailScreen extends ConsumerWidget {
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
-                        const Divider(),
+                        Divider(color: colorScheme.outlineVariant),
                         _DetailRow(
-                          label: 'Status',
+                          label: 'ステータス',
                           semanticLabel: SemanticsLabels.txDetailStatus,
                           child: Chip(
                             label: Text(transaction.status.displayName),
@@ -119,9 +126,9 @@ class TransactionDetailScreen extends ConsumerWidget {
                             ),
                           ),
                         ),
-                        const Divider(),
+                        Divider(color: colorScheme.outlineVariant),
                         _DetailRow(
-                          label: 'Transaction ID',
+                          label: '取引ID',
                           child: Text(
                             transaction.id,
                             style:
@@ -213,7 +220,7 @@ class _DetailRow extends StatelessWidget {
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
           ),
           if (semanticLabel != null)

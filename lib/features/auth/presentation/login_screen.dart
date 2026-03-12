@@ -42,10 +42,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authStateProvider);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('ログイン'),
       ),
       body: SafeArea(
         child: Padding(
@@ -54,19 +55,41 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Icon(
-                Icons.account_balance_wallet,
-                size: 80,
-                color: Colors.blue,
-              ),
-              const SizedBox(height: 32),
-              const Text(
-                'Transaction Viewer',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              Container(
+                width: 96,
+                height: 96,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colorScheme.primary,
+                      colorScheme.tertiary,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(24),
                 ),
+                child: const Icon(
+                  Icons.account_balance_wallet,
+                  size: 48,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                '取引ビューア',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'アカウントにログインしてください',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
               ),
               const SizedBox(height: 32),
               Semantics(
@@ -74,8 +97,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: TextField(
                   controller: _usernameController,
                   decoration: const InputDecoration(
-                    labelText: 'Username',
-                    prefixIcon: Icon(Icons.person),
+                    labelText: 'ユーザー名',
+                    prefixIcon: Icon(Icons.person_outline),
                   ),
                   textInputAction: TextInputAction.next,
                 ),
@@ -86,8 +109,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 child: TextField(
                   controller: _passwordController,
                   decoration: const InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.lock),
+                    labelText: 'パスワード',
+                    prefixIcon: Icon(Icons.lock_outline),
                   ),
                   obscureText: true,
                   textInputAction: TextInputAction.done,
@@ -112,13 +135,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 label: SemanticsLabels.loginSubmit,
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _handleLogin,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                  ),
                   child: _isLoading
                       ? const SizedBox(
                           height: 20,
                           width: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text('Login'),
+                      : const Text('ログイン'),
                 ),
               ),
             ],

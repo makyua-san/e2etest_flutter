@@ -16,37 +16,41 @@ class TransactionsListScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final transactionsAsync = ref.watch(filteredTransactionsProvider);
     final sortLabel = ref.watch(sortLabelProvider);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transactions'),
+        title: const Text('取引一覧'),
         actions: const [
           DebugInfoButton(),
         ],
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const TransactionSearchBar(),
-                const SizedBox(height: 12),
-                const CategoryFilter(),
-                const SizedBox(height: 8),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Semantics(
-                    label: SemanticsLabels.txSortLabel,
-                    child: Text(
-                      sortLabel,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey,
-                          ),
+          Container(
+            color: colorScheme.surface,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  const TransactionSearchBar(),
+                  const SizedBox(height: 12),
+                  const CategoryFilter(),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Semantics(
+                      label: SemanticsLabels.txSortLabel,
+                      child: Text(
+                        sortLabel,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -54,7 +58,7 @@ class TransactionsListScreen extends ConsumerWidget {
               data: (transactions) {
                 if (transactions.isEmpty) {
                   return const Center(
-                    child: Text('No transactions found'),
+                    child: Text('取引が見つかりません'),
                   );
                 }
 

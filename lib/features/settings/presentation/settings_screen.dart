@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:e2etest_flutter/app/router.dart';
 import 'package:e2etest_flutter/features/auth/providers/auth_provider.dart';
 import 'package:e2etest_flutter/features/settings/providers/settings_provider.dart';
-// import 'package:e2etest_flutter/features/settings/presentation/widgets/debug_panel.dart';
 import 'package:e2etest_flutter/shared/semantics/semantics_labels.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -14,10 +13,11 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
     final settingsNotifier = ref.read(settingsProvider.notifier);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('設定'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,9 +27,10 @@ class SettingsScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Preferences',
+                '環境設定',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.grey,
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.w600,
                     ),
               ),
             ),
@@ -41,8 +42,8 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsNotifications,
                     child: SwitchListTile(
-                      title: const Text('Notifications'),
-                      subtitle: const Text('Receive transaction alerts'),
+                      title: const Text('通知'),
+                      subtitle: const Text('取引アラートを受信する'),
                       value: settings.notificationsEnabled,
                       onChanged: (value) {
                         settingsNotifier.setNotificationsEnabled(value);
@@ -53,8 +54,8 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsMaskAmount,
                     child: SwitchListTile(
-                      title: const Text('Mask Amounts'),
-                      subtitle: const Text('Hide transaction amounts'),
+                      title: const Text('金額を非表示'),
+                      subtitle: const Text('取引金額を隠す'),
                       value: settings.maskAmountEnabled,
                       onChanged: (value) {
                         settingsNotifier.setMaskAmountEnabled(value);
@@ -65,8 +66,8 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsBiometric,
                     child: SwitchListTile(
-                      title: const Text('Biometric Lock'),
-                      subtitle: const Text('Require fingerprint to open'),
+                      title: const Text('生体認証ロック'),
+                      subtitle: const Text('指紋認証でロック解除'),
                       value: settings.biometricEnabled,
                       onChanged: (value) {
                         settingsNotifier.setBiometricEnabled(value);
@@ -76,22 +77,7 @@ class SettingsScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            // const SizedBox(height: 24),
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //   child: Text(
-            //     'Debug',
-            //     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            //           color: Colors.grey,
-            //         ),
-            //   ),
-            // ),
-            // const SizedBox(height: 8),
-            // const Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 16),
-            //   child: DebugPanel(),
-            // ),
-            // const SizedBox(height: 24),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Semantics(
@@ -102,7 +88,7 @@ class SettingsScreen extends ConsumerWidget {
                     context.go(AppRoutes.login);
                   },
                   icon: const Icon(Icons.logout),
-                  label: const Text('Logout'),
+                  label: const Text('ログアウト'),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.red,
                   ),

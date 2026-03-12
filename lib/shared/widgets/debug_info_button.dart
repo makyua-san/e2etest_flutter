@@ -18,7 +18,7 @@ class DebugInfoButton extends ConsumerWidget {
             builder: (context) => const DebugInfoDialog(),
           );
         },
-        tooltip: 'Debug Info',
+        tooltip: 'デバッグ情報',
       ),
     );
   }

@@ -16,7 +16,7 @@ class CategoryFilter extends ConsumerWidget {
       child: DropdownButtonFormField<Category?>(
         value: selectedCategory,
         decoration: InputDecoration(
-          labelText: 'Category',
+          labelText: 'カテゴリ',
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -28,7 +28,7 @@ class CategoryFilter extends ConsumerWidget {
         items: [
           const DropdownMenuItem<Category?>(
             value: null,
-            child: Text('All Categories'),
+            child: Text('すべてのカテゴリ'),
           ),
           ...Category.values.map(
             (category) => DropdownMenuItem<Category?>(
