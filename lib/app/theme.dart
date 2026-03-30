@@ -5,7 +5,7 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.indigo,
+      seedColor: const Color(0xFF1A73A7),
       brightness: Brightness.light,
     );
 
@@ -21,7 +21,7 @@ class AppTheme {
       cardTheme: CardTheme(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           side: BorderSide(
             color: colorScheme.outlineVariant,
             width: 1,
@@ -38,7 +38,7 @@ class AppTheme {
         space: 1,
       ),
       listTileTheme: const ListTileThemeData(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
@@ -50,9 +50,27 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.infinity, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        side: BorderSide.none,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? colorScheme.onPrimary : null),
+        trackColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? colorScheme.primary : null),
       ),
       textTheme: const TextTheme().apply(
         fontFamilyFallback: ['Hiragino Sans', 'Yu Gothic', 'Meiryo', 'sans-serif'],
@@ -62,7 +80,7 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.indigo,
+      seedColor: const Color(0xFF1A73A7),
       brightness: Brightness.dark,
     );
 
@@ -78,7 +96,7 @@ class AppTheme {
       cardTheme: CardTheme(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           side: BorderSide(
             color: colorScheme.outlineVariant,
             width: 1,
@@ -95,7 +113,7 @@ class AppTheme {
         space: 1,
       ),
       listTileTheme: const ListTileThemeData(
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
@@ -107,9 +125,27 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(double.infinity, 48),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        side: BorderSide.none,
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? colorScheme.onPrimary : null),
+        trackColor: MaterialStateProperty.resolveWith((s) =>
+            s.contains(MaterialState.selected) ? colorScheme.primary : null),
       ),
       textTheme: const TextTheme().apply(
         fontFamilyFallback: ['Hiragino Sans', 'Yu Gothic', 'Meiryo', 'sans-serif'],

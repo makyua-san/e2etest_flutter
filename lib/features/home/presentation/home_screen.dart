@@ -20,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ホーム'),
+        title: const Text('スマートウォレット'),
         actions: const [
           DebugInfoButton(),
         ],
@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                   gradient: LinearGradient(
                     colors: [
                       colorScheme.primary,
-                      colorScheme.tertiary,
+                      colorScheme.primary.withOpacity(0.75),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -46,21 +46,23 @@ class HomeScreen extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.person_outline,
-                        size: 48,
-                        color: colorScheme.onPrimary,
-                      ),
-                      const SizedBox(height: 8),
                       Semantics(
                         label: SemanticsLabels.homeUsername,
                         child: Text(
-                          'ようこそ、${authState.username ?? 'User'}さん',
+                          'こんにちは、${authState.username ?? 'User'}さん',
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                 color: colorScheme.onPrimary,
                               ),
                         ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'スマートウォレット',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onPrimary.withOpacity(0.8),
+                            ),
                       ),
                     ],
                   ),
@@ -71,12 +73,13 @@ class HomeScreen extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(
-                            Icons.calendar_month,
+                            Icons.account_balance,
                             size: 20,
                             color: colorScheme.onSurfaceVariant,
                           ),
@@ -91,18 +94,30 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 8),
                       monthlyTotalAsync.when(
-                        data: (total) => Semantics(
-                          label: SemanticsLabels.homeMonthlyTotal,
-                          child: Text(
-                            currencyFormat.format(total),
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: colorScheme.primary,
-                                ),
-                          ),
+                        data: (total) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Semantics(
+                              label: SemanticsLabels.homeMonthlyTotal,
+                              child: Text(
+                                currencyFormat.format(total),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: colorScheme.primary,
+                                    ),
+                              ),
+                            ),
+                            Text(
+                              '税込',
+                              style: TextStyle(
+                                color: colorScheme.onSurfaceVariant,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                         loading: () => const CircularProgressIndicator(),
                         error: (e, _) => Text('Error: $e'),
@@ -111,17 +126,13 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 16),
               Semantics(
                 label: SemanticsLabels.homeToTransactions,
-                child: ElevatedButton.icon(
+                child: FilledButton.icon(
                   onPressed: () => context.push(AppRoutes.transactions),
                   icon: const Icon(Icons.receipt_long),
-                  label: const Text('取引一覧を見る'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.primary,
-                    foregroundColor: colorScheme.onPrimary,
-                  ),
+                  label: const Text('取引を確認する'),
                 ),
               ),
               const SizedBox(height: 12),

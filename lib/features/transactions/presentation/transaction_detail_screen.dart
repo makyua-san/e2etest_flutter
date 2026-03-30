@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:e2etest_flutter/app/category_colors.dart';
 import 'package:e2etest_flutter/features/transactions/providers/transactions_provider.dart';
 import 'package:e2etest_flutter/shared/semantics/semantics_labels.dart';
 
@@ -23,7 +24,7 @@ class TransactionDetailScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Semantics(
           label: SemanticsLabels.txDetailTitle,
-          child: const Text('取引詳細'),
+          child: const Text('取引の詳細'),
         ),
       ),
       body: transactionAsync.when(
@@ -50,9 +51,10 @@ class TransactionDetailScreen extends ConsumerWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                _getCategoryColor(transaction.category.name),
-                                _getCategoryColor(transaction.category.name)
-                                    .withOpacity(0.6),
+                                AppCategoryColors.forCategory(transaction.category.name)
+                                    .withOpacity(0.9),
+                                AppCategoryColors.forCategory(transaction.category.name)
+                                    .withOpacity(0.5),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -68,14 +70,17 @@ class TransactionDetailScreen extends ConsumerWidget {
                         const SizedBox(height: 16),
                         Text(
                           transaction.merchant,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                letterSpacing: 0.5,
+                                fontWeight: FontWeight.w600,
+                              ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
                         Chip(
                           label: Text(transaction.category.displayName),
                           backgroundColor:
-                              _getCategoryColor(transaction.category.name)
+                              AppCategoryColors.forCategory(transaction.category.name)
                                   .withOpacity(0.1),
                         ),
                       ],
@@ -95,7 +100,7 @@ class TransactionDetailScreen extends ConsumerWidget {
                             currencyFormat.format(transaction.amount),
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
+                                .headlineSmall
                                 ?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: colorScheme.primary,
@@ -119,10 +124,10 @@ class TransactionDetailScreen extends ConsumerWidget {
                           child: Chip(
                             label: Text(transaction.status.displayName),
                             backgroundColor:
-                                _getStatusColor(transaction.status.name)
+                                AppStatusColors.forStatus(transaction.status.name)
                                     .withOpacity(0.1),
                             labelStyle: TextStyle(
-                              color: _getStatusColor(transaction.status.name),
+                              color: AppStatusColors.forStatus(transaction.status.name),
                             ),
                           ),
                         ),
@@ -170,33 +175,6 @@ class TransactionDetailScreen extends ConsumerWidget {
     }
   }
 
-  Color _getCategoryColor(String category) {
-    switch (category) {
-      case 'subscription':
-        return Colors.purple;
-      case 'groceries':
-        return Colors.orange;
-      case 'transport':
-        return Colors.blue;
-      case 'shopping':
-        return Colors.pink;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  Color _getStatusColor(String status) {
-    switch (status) {
-      case 'completed':
-        return Colors.green;
-      case 'pending':
-        return Colors.orange;
-      case 'failed':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
-  }
 }
 
 class _DetailRow extends StatelessWidget {

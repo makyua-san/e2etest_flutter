@@ -11,7 +11,7 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: '取引ビューア',
+      title: 'スマートウォレット',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,

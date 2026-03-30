@@ -27,7 +27,7 @@ class SettingsScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                '環境設定',
+                'アプリの設定',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.w600,
@@ -42,6 +42,7 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsNotifications,
                     child: SwitchListTile(
+                      secondary: const Icon(Icons.notifications_outlined),
                       title: const Text('通知'),
                       subtitle: const Text('取引アラートを受信する'),
                       value: settings.notificationsEnabled,
@@ -54,6 +55,7 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsMaskAmount,
                     child: SwitchListTile(
+                      secondary: const Icon(Icons.visibility_off_outlined),
                       title: const Text('金額を非表示'),
                       subtitle: const Text('取引金額を隠す'),
                       value: settings.maskAmountEnabled,
@@ -66,6 +68,7 @@ class SettingsScreen extends ConsumerWidget {
                   Semantics(
                     label: SemanticsLabels.settingsBiometric,
                     child: SwitchListTile(
+                      secondary: const Icon(Icons.fingerprint),
                       title: const Text('生体認証ロック'),
                       subtitle: const Text('指紋認証でロック解除'),
                       value: settings.biometricEnabled,
@@ -90,9 +93,16 @@ class SettingsScreen extends ConsumerWidget {
                   icon: const Icon(Icons.logout),
                   label: const Text('ログアウト'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.red,
+                    foregroundColor: colorScheme.error,
                   ),
                 ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            const Card(
+              child: ListTile(
+                title: Text('バージョン'),
+                trailing: Text('1.0.0'),
               ),
             ),
             const SizedBox(height: 32),

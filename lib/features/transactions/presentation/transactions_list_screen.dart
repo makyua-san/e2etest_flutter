@@ -20,7 +20,7 @@ class TransactionsListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('取引一覧'),
+        title: const Text('お取引履歴'),
         actions: const [
           DebugInfoButton(),
         ],
@@ -28,7 +28,10 @@ class TransactionsListScreen extends ConsumerWidget {
       body: Column(
         children: [
           Container(
-            color: colorScheme.surface,
+            decoration: BoxDecoration(
+              color: colorScheme.surface,
+              border: Border(bottom: BorderSide(color: colorScheme.outlineVariant, width: 1)),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -57,8 +60,17 @@ class TransactionsListScreen extends ConsumerWidget {
             child: transactionsAsync.when(
               data: (transactions) {
                 if (transactions.isEmpty) {
-                  return const Center(
-                    child: Text('取引が見つかりません'),
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                        const Text('取引が見つかりません'),
+                      ],
+                    ),
                   );
                 }
 

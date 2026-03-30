@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:e2etest_flutter/app/category_colors.dart';
 import 'package:e2etest_flutter/domain/entities/transaction.dart';
 import 'package:e2etest_flutter/shared/semantics/semantics_labels.dart';
 
@@ -21,7 +22,7 @@ class TransactionListItem extends StatelessWidget {
     return Semantics(
       label: SemanticsLabels.txRow(transaction.id),
       child: Card(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(12),
@@ -33,13 +34,13 @@ class TransactionListItem extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: _getCategoryColor(transaction.category.name)
+                    color: AppCategoryColors.forCategory(transaction.category.name)
                         .withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     _getCategoryIcon(transaction.category.name),
-                    color: _getCategoryColor(transaction.category.name),
+                    color: AppCategoryColors.forCategory(transaction.category.name),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -60,7 +61,7 @@ class TransactionListItem extends StatelessWidget {
                         child: Text(
                           dateFormat.format(transaction.timestamp.toLocal()),
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey,
+                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                               ),
                         ),
                       ),
@@ -73,7 +74,7 @@ class TransactionListItem extends StatelessWidget {
                     currencyFormat.format(transaction.amount),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
-                        ),
+                        ).copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ],
@@ -99,18 +100,4 @@ class TransactionListItem extends StatelessWidget {
     }
   }
 
-  Color _getCategoryColor(String category) {
-    switch (category) {
-      case 'subscription':
-        return Colors.purple;
-      case 'groceries':
-        return Colors.orange;
-      case 'transport':
-        return Colors.blue;
-      case 'shopping':
-        return Colors.pink;
-      default:
-        return Colors.grey;
-    }
-  }
 }
