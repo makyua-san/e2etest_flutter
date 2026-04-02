@@ -31,12 +31,18 @@ class SemanticsLabels {
   static const txDetailTimestamp = 'tx.detail.timestamp';
   static const txDetailAmount = 'tx.detail.amount';
   static const txDetailStatus = 'tx.detail.status';
+  static const txDetailToList = 'tx.detail.toList';
 
   // Settings Screen
   static const settingsNotifications = 'settings.notifications';
   static const settingsMaskAmount = 'settings.maskAmount';
   static const settingsBiometric = 'settings.biometric';
   static const settingsLogout = 'settings.logout';
+
+  // Bottom Navigation
+  static const navHome = 'nav.home';
+  static const navTransactions = 'nav.transactions';
+  static const navSettings = 'nav.settings';
 
   // Debug Panel
   static const debugPanel = 'debug.panel';

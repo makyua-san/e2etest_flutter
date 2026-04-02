@@ -35,7 +35,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     setState(() => _isLoading = false);
 
     if (success && mounted) {
-      context.go(AppRoutes.home);
+      // リダイレクトロジックに遷移先を委ねる（ディープリンク先があればそちらへ）
+      context.go(AppRoutes.login);
     }
   }
 

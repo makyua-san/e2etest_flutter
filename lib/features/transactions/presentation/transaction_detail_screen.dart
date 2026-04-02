@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:e2etest_flutter/app/category_colors.dart';
+import 'package:e2etest_flutter/app/router.dart';
 import 'package:e2etest_flutter/features/transactions/providers/transactions_provider.dart';
 import 'package:e2etest_flutter/shared/semantics/semantics_labels.dart';
 
@@ -20,8 +22,16 @@ class TransactionDetailScreen extends ConsumerWidget {
     final currencyFormat = NumberFormat.currency(locale: 'ja_JP', symbol: '¥');
     final colorScheme = Theme.of(context).colorScheme;
 
+    final canPop = GoRouter.of(context).canPop();
+
     return Scaffold(
       appBar: AppBar(
+        leading: canPop
+            ? null
+            : IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => context.go(AppRoutes.transactions),
+              ),
         title: Semantics(
           label: SemanticsLabels.txDetailTitle,
           child: const Text('取引の詳細'),
@@ -146,6 +156,17 @@ class TransactionDetailScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
+                if (!canPop) ...[
+                  const SizedBox(height: 24),
+                  Semantics(
+                    label: SemanticsLabels.txDetailToList,
+                    child: OutlinedButton.icon(
+                      onPressed: () => context.go(AppRoutes.transactions),
+                      icon: const Icon(Icons.list_alt),
+                      label: const Text('取引一覧を見る'),
+                    ),
+                  ),
+                ],
               ],
             ),
           );

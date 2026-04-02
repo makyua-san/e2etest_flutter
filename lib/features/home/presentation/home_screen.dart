@@ -130,7 +130,7 @@ class HomeScreen extends ConsumerWidget {
               Semantics(
                 label: SemanticsLabels.homeToTransactions,
                 child: FilledButton.icon(
-                  onPressed: () => context.push(AppRoutes.transactions),
+                  onPressed: () => context.go(AppRoutes.transactions),
                   icon: const Icon(Icons.receipt_long),
                   label: const Text('取引を確認する'),
                 ),
@@ -139,7 +139,7 @@ class HomeScreen extends ConsumerWidget {
               Semantics(
                 label: SemanticsLabels.homeToSettings,
                 child: OutlinedButton.icon(
-                  onPressed: () => context.push(AppRoutes.settings),
+                  onPressed: () => context.go(AppRoutes.settings),
                   icon: const Icon(Icons.settings),
                   label: const Text('設定'),
                 ),
