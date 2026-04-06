@@ -42,7 +42,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-.bob
+.bob/.bob-errors
 .claude
 
 e2etest/screenshots

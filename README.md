@@ -33,8 +33,18 @@ Mobile MCPは、AIエージェントがモバイルデバイス（エミュレ�
 ### 前提条件
 
 - FVM（Flutter Version Management）がインストール済みであること[^fvm-docs]
-- Android Studio（Android開発の場合）
+- Flutter の公式ドキュメントを参照できること[^flutter-docs]
+- Android Studio（Android開発の場合）がインストール済みであること[^android-studio-docs]
+- Android SDK Platform Tools（`adb`）がインストール済みであること[^android-sdk-docs]
 - Mobile MCPサーバーが起動済みであること
+
+#### adb のインストールガイド
+
+1. Android Studio を利用している場合は SDK Manager から **Android SDK Platform-Tools** をインストールする
+2. Android Studio を使わない場合は Android Developers 配布の Platform Tools を取得して展開する
+3. `platform-tools` ディレクトリを PATH に追加する
+4. ターミナルで `adb version` を実行し、コマンドが認識されることを確認する
+5. デバイス接続後に `adb devices` を実行し、対象デバイスが表示されることを確認する
 
 
 ---
@@ -196,8 +206,19 @@ fvm dart run build_runner watch
 
 - [要件定義](requirements.md)：詳細な機能要件とアーキテクチャ設計
 - [AGENTS.md](AGENTS.md)：AI Agentのための開発ガイド（Mobile MCP E2Eテストガイド含む）
-- [E2E手順書](e2etest/howto.md)：正常系E2Eテストの詳細手順
-[^fvm-docs]: [FVM Documentation（公式）](https://fvm.app/docs/getting_started/installation)
+- [E2E手順管理](e2etest/howto/README.md)：正常系E2Eの親ファイル。チェックリストで結果を管理し、個別手順書への導線を持つ
+
+## 参考ドキュメント
+
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [Android Studio Documentation](https://developer.android.com/studio)
+- [Android SDK Platform Tools](https://developer.android.com/tools/releases/platform-tools)
+- [FVM Documentation](https://fvm.app/documentation/getting-started/installation)
+
+[^fvm-docs]: [FVM Documentation（公式）](https://fvm.app/documentation/getting-started/installation)
+[^flutter-docs]: [Flutter Documentation（公式）](https://docs.flutter.dev/)
+[^android-studio-docs]: [Android Studio Documentation（公式）](https://developer.android.com/studio)
+[^android-sdk-docs]: [Android SDK Platform Tools（公式）](https://developer.android.com/tools/releases/platform-tools)
 
 
 ## ライセンス
